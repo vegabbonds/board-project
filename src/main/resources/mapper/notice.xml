@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.naver.test.orm.mapper.NoticeMapper">
+	<select id="getNoticeList" resultType="com.naver.test.orm.entity.Notice">
+		SELECT
+		seq
+		, title
+		, content
+		, userId
+		FROM notice
+		ORDER BY seq DESC
+	</select>
+
+	<select id="getNoticeListByPage" resultType="com.naver.test.orm.entity.Notice">
+		SELECT
+		seq
+		, title
+		,
+		content
+		, userId
+		FROM notice
+		ORDER BY seq DESC
+		LIMIT #{offset}, #{count}
+	</select>
+
+	<select id="getNoticeListBySequence" resultType="com.naver.test.orm.entity.Notice">
+		SELECT
+		seq
+		, title
+		, content
+		, userId
+		FROM notice
+		WHERE seq = #{seq}
+	</select>
+
+	<update id="saveNotice" parameterType="com.naver.test.orm.entity.Notice">
+		INSERT INTO notice(seq,
+		title, content, userId)
+		VALUES(#{seq}, #{title}, #{content}, #{userId})
+	</update>
+
+	<update id="modifyNotice" parameterType="com.naver.test.orm.entity.Notice">
+		UPDATE notice SET title=
+		#{title}, content=#{content}
+		WHERE seq = #{seq}
+	</update>
+
+</mapper> 
